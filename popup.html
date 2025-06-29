@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>ChibiBuddy</title>
+</head>
+<body>
+  <div class="container">
+    <img src="chibi.png" class="chibi" />
+    <h2>ChibiBuddy 🐣</h2>
+    <div id="clock"></div>
+    <input type="text" id="task" placeholder="Your task" />
+    <input type="datetime-local" id="time" />
+    <button id="add">Remind Me</button>
+    <button id="themeToggle">🌞/🌙 Theme</button>
+    <button id="exportTasks">📄 Export Tasks</button>
+    
+    <h3>🟡 Ongoing Tasks</h3>
+    <ul id="taskList"></ul>
+
+    <h3>✅ Completed Tasks</h3>
+    <ul id="completedList"></ul>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
