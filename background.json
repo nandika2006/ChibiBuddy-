@@ -1,0 +1,39 @@
+chrome.alarms.onAlarm.addListener((alarm) => {
+  chrome.storage.local.get(alarm.name, (data) => {
+    const task = data[alarm.name];
+    if (task) {
+      chrome.notifications.create('', {
+        title: 'ChibiBuddy Reminder 🐣',
+        message: task,
+        iconUrl: 'chibi.png',
+        type: 'basic',
+        buttons: [{ title: "Snooze 5 min" }],
+        requireInteraction: true
+      });
+
+      // ✅ Direct Speech API usage
+      const msg = new SpeechSynthesisUtterance(`Hey! Time for ${task}`);
+      speechSynthesis.speak(msg);
+
+      const completedTask = {
+        name: task,
+        completedAt: new Date().toLocaleString()
+      };
+      chrome.storage.local.get({ completed: [] }, (res) => {
+        const updated = res.completed;
+        updated.push(completedTask);
+        chrome.storage.local.set({ completed: updated });
+      });
+
+      chrome.storage.local.remove(alarm.name);
+    }
+  });
+});
+
+chrome.notifications.onButtonClicked.addListener((notifId, btnIdx) => {
+  if (btnIdx === 0) {
+    const newTime = Date.now() + 5 * 60 * 1000;
+    const id = `snoozed-${Date.now()}`;
+    chrome.alarms.create(id, { when: newTime });
+  }
+});
