@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ChibiBuddy RemindMe",
+  "version": "1.1",
+  "description": "A cute task reminder with pop-ups, sound, countdowns, voice, and a chibi friend!",
+  "permissions": ["notifications", "storage", "alarms"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "48": "icon.png"
+  }
+}
